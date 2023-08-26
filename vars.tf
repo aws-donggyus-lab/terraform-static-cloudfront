@@ -10,6 +10,28 @@ variable "env" {
 ### S3
 ##########################################################################################
 variable "s3_is_versioning" {
+  type    = bool
   default = true
 }
 
+variable "s3_acl" {
+  type    = string
+  default = "private"
+}
+
+variable "s3_cors_rule" {
+  default = {
+    allowed_headers = ["*"]
+    allowed_methods = ["PUT", "POST"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+}
+
+##########################################################################################
+### CloudFront
+##########################################################################################
+variable "cf_acm" {
+  default = null
+}

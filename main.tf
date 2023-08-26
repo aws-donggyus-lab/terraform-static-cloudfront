@@ -9,6 +9,14 @@ resource "aws_s3_bucket" "s3_bucket" {
     enabled = true
   }
 
+  cors_rule {
+    allowed_headers = lookup(var.s3_cors_rule, "allowed_headers")
+    allowed_methods = lookup(var.s3_cors_rule, "allowed_methods")
+    allowed_origins = lookup(var.s3_cors_rule, "allowed_origins")
+    expose_headers  = lookup(var.s3_cors_rule, "expose_headers")
+    max_age_seconds = lookup(var.s3_cors_rule, "max_age_seconds")
+  }
+
   tags = {
     Name     = "${var.common_name}"
     Resource = "s3"
@@ -39,6 +47,6 @@ resource "aws_s3_bucket_object" "s3_object" {
 ### CloudFront +S3 + Policy
 ##########################################################################################
 
-output v {
-    value = aws_s3_bucket.s3_bucket
+output "v" {
+  value = aws_s3_bucket.s3_bucket
 }
