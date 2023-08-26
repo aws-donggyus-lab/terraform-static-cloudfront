@@ -20,6 +20,7 @@ module "static-site" {
     max_age_seconds = 3000
   }
   s3_source = "./files/index.html"
+  s3_policy = {}
 
   ## Cloudfront
   cf_acm            = null
@@ -54,9 +55,6 @@ module "static-site" {
   cf_viewer_acm_arn           = null
   cf_minimum_protocol_version = null
   cf_ssl_support_method       = null
-
-
-
 }
 
 output "value" {

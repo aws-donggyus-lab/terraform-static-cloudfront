@@ -39,6 +39,9 @@ variable "s3_cors_rule" {
 }
 
 variable "s3_source" {}
+variable "s3_policy" {
+  default = {}
+}
 
 ##########################################################################################
 ### CloudFront

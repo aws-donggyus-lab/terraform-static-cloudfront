@@ -62,7 +62,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     connection_timeout       = var.cf_origin_timeout
     domain_name              = aws_s3_bucket.s3_bucket.bucket_regional_domain_name
     origin_id                = aws_s3_bucket.s3_bucket.bucket_regional_domain_name
-    origin_path              = "/${var.env}"
+    origin_path              = "/${var.env}/index.html"
   }
 
   default_cache_behavior {
@@ -108,10 +108,35 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 ##########################################################################################
 ### CloudFront +S3 + Policy
 ##########################################################################################
-# resource "aws_s3_bucket_policy" "s3_bucket_policy" {
+resource "aws_s3_bucket_policy" "s3_bucket_policy" {
+  bucket = aws_s3_bucket.s3_bucket.id
 
-# }
+  policy = jsonencode(merge(var.s3_policy, {
+    "Version" : "2008-10-17",
+    "Id" : "PolicyForCloudFrontPrivateContent",
+    "Statement" : [
+      {
+        "Sid" : "AllowCloudFrontServicePrincipal",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "cloudfront.amazonaws.com"
+        },
+        "Action" : "s3:GetObject",
+        "Resource" : "arn:aws:s3:::${aws_s3_bucket.s3_bucket.bucket}/*",
+        "Condition" : {
+          "StringEquals" : {
+            "AWS:SourceArn" : "${aws_cloudfront_distribution.s3_distribution.arn}"
+          }
+        }
+      }
+    ]
+  }))
+}
 
-output "v" {
+output "s3" {
   value = aws_s3_bucket.s3_bucket
+}
+
+output "cloudfront" {
+  value = aws_cloudfront_distribution.s3_distribution
 }
