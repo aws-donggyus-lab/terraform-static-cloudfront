@@ -19,8 +19,11 @@ module "static-site" {
     expose_headers  = ["ETag"]
     max_age_seconds = 3000
   }
-  s3_source = "./files/index.html"
-  s3_policy = {}
+  s3_source = "./common/index.html"
+  s3_website = {
+    index = "index.html"
+    error = "error.html"
+  }
 
   ## Cloudfront
   cf_acm            = null
@@ -57,6 +60,6 @@ module "static-site" {
   cf_ssl_support_method       = null
 }
 
-output "value" {
-  value = module.static-site
-}
+# output "value" {
+#   value = module.static-site
+# }
