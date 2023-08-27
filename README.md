@@ -75,3 +75,4 @@ module "static-site" {
 ## Reference
 
 - vars.tf 참고
+- <a href="https://registry.terraform.io/modules/zkfmapf123/cloudfront/static/latest/examples/default-static-site"> Terraform Module Site </a>
