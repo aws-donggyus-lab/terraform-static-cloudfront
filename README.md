@@ -1,7 +1,13 @@
 # Terraform-Static-Cloudfront
 
-## Required AWS Resource
+## Desc
 
-- IAM
+- Cloudfront + S3 Deploy use Static Site
 
-- CloudFront Policy
+## Example
+
+- [Default-Static-Site](./example/default-static-site/main.tf)
+
+## Reference
+
+- vars.tf 참고
