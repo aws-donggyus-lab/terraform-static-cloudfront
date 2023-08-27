@@ -6,7 +6,7 @@
 
 ## Example
 
-- [Default-Static-Site](./example/default-static-site/main.tf)
+- <a href="https://github.com/zkfmapf123/terraform-static-cloudfront/blob/master/example/default-static-site/main.tf"> Default-Static-Site</a>
 
 ## Reference
 
