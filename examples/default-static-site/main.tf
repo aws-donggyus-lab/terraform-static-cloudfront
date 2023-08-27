@@ -59,7 +59,3 @@ module "static-site" {
   cf_minimum_protocol_version = null
   cf_ssl_support_method       = null
 }
-
-# output "value" {
-#   value = module.static-site
-# }
