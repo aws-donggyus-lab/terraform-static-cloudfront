@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "static-site" {
-  source = "../"
+  source = "../../"
 
   ## Commomn
   common_name = "dk-example"
